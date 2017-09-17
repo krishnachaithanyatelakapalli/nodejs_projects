@@ -1,0 +1,19 @@
+.thumbnail caption{
+	padding: 9px;
+}
+.thumbnail{
+	padding: 0;
+}
+.thumbnail img{
+	width: 100%;
+}
+#comment-btn{
+	float: right;
+}
+.new-form{
+	width: 30%;
+	margin: 25px auto;
+}
+.submit-btn{
+	width:100%;
+}

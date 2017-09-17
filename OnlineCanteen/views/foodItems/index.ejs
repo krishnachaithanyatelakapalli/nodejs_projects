@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+	<div class="container">
+		<a class="btn btn-success pull-right" href="/checkout">Checkout</a>
+		<% categories.forEach(function(category) { %>
+			<h1><%= category %></h1>
+			<hr>
+			<div class="row">
+				<% items.forEach(function(item){ %>						
+					<% if(item.category === category){ %>					
+						<div class="col-md-4" id="view">			
+							<div class="thumbnail">				
+								<img src="<%= item.image %>">
+							</div>
+							<div class="caption-full">
+								<h4 class="pull-right">$ <%= parseFloat(item.price) %></h4>
+								<h2><%= item.name %></h2>								
+								<h3><%= item.description %></h3>		
+								<a class="pull-right" href="/items/<%= item._id %>">...more</a>
+								<form action="/Items/<%= item._id %>/select" method="POST">
+									<button id="select-btn" class="btn btn-success">Select Item</button>
+								</form>
+							</div>
+						</div>					
+					<% } %>														
+				<% }) %>
+			</div>			
+		<% }) %>		
+	</div>
+<% include ../partials/footer %>
