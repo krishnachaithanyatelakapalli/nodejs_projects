@@ -1,0 +1,42 @@
+.row{
+	margin: 0;
+}
+.thumbnail caption{
+	padding: 9px;
+}
+.thumbnail{
+	padding: 0;
+}
+.thumbnail img{
+	width: 100%;
+}
+#comment-btn{
+	float: right;
+}
+.new-form{
+	width: 30%;
+	margin: 25px auto;
+}
+.submit-btn{
+	width:100%;
+}
+#select-num{
+	margin:0 5px;
+}
+.inline-view{
+	display: inline;	
+}
+#cart{
+	/*border-left: 5px solid black;*/
+	/*height: 100%;*/
+	margin: auto;
+}
+#outer-row{
+	margin:0 0;
+}
+.disp-block{
+	display: block;
+}
+.disp-none{
+	display: none;
+}

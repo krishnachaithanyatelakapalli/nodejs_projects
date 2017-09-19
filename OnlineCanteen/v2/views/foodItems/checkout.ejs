@@ -1,0 +1,16 @@
+<% include ../partials/header %>
+	<div class="container">
+		<div class="page-header">
+			<h2>Checking out... <%= checkout.name %></h2>
+		</div>		
+		<ul class="list-group">
+			<% var total = 0 %>
+			<% checkout.list.forEach(function(item){ %>
+				<li class="list-group-item"><%= item.name %> <span class="pull-right">$ <%= item.price %></span></li>
+				<% total += item.price %>
+			<% }) %>
+		</ul>
+		<hr>
+		<p><strong>Total <span class="pull-right">$ <%= total %></span></strong></p>
+	</div>
+<% include ../partials/footer %>
