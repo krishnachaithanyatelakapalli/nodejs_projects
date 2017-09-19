@@ -40,3 +40,17 @@
 .disp-none{
 	display: none;
 }
+#checkout_form{
+	margin: 20px 1px 5px 1px;
+}
+#checkout_btn{
+	width:100%;
+}
+#remove_item{
+	display: none;
+	border: none;
+	margin-left: 10px;
+}
+.cart_li:hover #remove_item{
+	display: inline-block;
+}

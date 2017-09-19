@@ -1,7 +1,8 @@
 var mongoose    = require("mongoose"),
 	Items  		= require("./models/item"),
 	Comment	    = require("./models/comment"),
-	Checkout 	= require("./models/checkout");
+	Checkout 	= require("./models/checkout"),
+	Order 		= require("./models/order");
 
 var items = [
 	{
@@ -46,13 +47,24 @@ var user1 = {
 	email: "bob.marley@gmail.com"
 }
 
+var order_list = [
+	{
+		name: "Soup",
+		quantity: 2
+	},
+	{
+		name: "Veg. Sandwich",
+		quantity: 1
+	}
+]
+
 // var ids = [59bddbb9cbd67a124a24256b
 // 59bddbb9cbd67a124a242568
 // 59bddbb9cbd67a124a242569
 // 59bddbb9cbd67a124a24256a
 // 59bddbb9cbd67a124a24256c]
 
-function seedDB() {
+function seedDB() {	
 	Items.remove({}, function(err){
 		if(err){
 			// Address this error
@@ -87,14 +99,33 @@ function seedDB() {
 												foodItems.save();
 												console.log("Comment creadted");
 												// console.log(foodItems.comments);
-												// console.log(checkout.list);
-												checkout.list.push(foodItems);
-												checkout.save();
+												// console.log(checkout.list);												
 											}
 										});										
 									}
 								});			
 							});					
+							order_list.forEach(function(orders){
+								Order.create(orders, function(err, order){
+									if(err){
+										//Handle this error
+										console.log(err);
+									} else {										
+										Items.find({name: order.name}, function(err, item){
+											if(err){
+												//Handle this error
+												console.log(err);
+											} else {												
+												order.price = item[0].price;
+												// console.log(order);
+												// checkout.list.push(order);
+												// checkout.save();
+												// console.log(checkout);
+											}
+										});										
+									}
+								});
+							});
 						}
 					});			
 				}

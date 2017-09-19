@@ -7,7 +7,8 @@ var express 		= require("express"),
 var	seedDB			= require("./seeds"),
 	Items			= require("./models/item"),
 	Comment 		= require("./models/comment"),
-	Checkout 		= require("./models/checkout");
+	Checkout 		= require("./models/checkout"),
+	Order			= require("./models/order");
 
 var categories = ["Soups", "Sandwiches", "Desserts"];
 
@@ -111,21 +112,58 @@ app.get("/Items/:id", function(req, res){
 //==========================================================================================
 //		CHECKOUT ROUTES
 //==========================================================================================
-app.post("/Items/:id/select", function(req, res){
-	Checkout.findOne({name: "Bob Marley"}, function(err, checkout){
+app.post("/Order/:qnt", function(req, res){	
+	var orders = [];
+	for(var i = 0; i < req.params.qnt; i++){
+		if(req.params.qnt > 1){
+		var new_order = 
+			{
+				name: req.body.items.item_name[i],
+				quantity: req.body.items.num[i]
+			}		
+		} else {
+			var new_order = 
+			{
+				name: req.body.items.item_name,
+				quantity: req.body.items.num
+			}
+		}
+		orders.push(new_order);
+	}
+	// console.log(orders);
+	Checkout.findOne({name: "Bob Marley"}).populate("list").exec(function(err, checkout){
 		if(err){
 			//Handle this error
 			console.log(err);
 		} else {
-			checkout.list.push(req.params.id);
-			checkout.save();			
-		}		
+			orders.forEach(function(order){
+				Items.findOne({name: order.name}, function(err, foundItem){
+					if(err){
+						//Handle this error
+						console.log(err);
+					} else {
+						// console.log(foundItem.name);
+						order.price = foundItem.price;						
+						Order.create(order, function(err, curr_order){
+							if(err){
+								//Handle this error
+								console.log(err);
+							} else {
+								checkout.list.push(order);
+								checkout.save();
+							}			
+						});
+					}
+				});
+				
+			});
+		}			
 	});	
-	res.redirect("/Items");
+	res.redirect("/Checkout");
 	// res.end();
 });
 
-app.get("/checkout", function(req, res){
+app.get("/Checkout", function(req, res){
 	Checkout.findOne({name: "Bob Marley"}).populate("list").exec(function(err, checkout){
 		if(err){
 			//Handle this error
@@ -158,6 +196,7 @@ app.post("/Items/:id/comment", function(req, res){
 			console.log(err);
 		} else {
 			Comment.create(req.body.comment, function(err, comment){
+				console.log(req);
 				item.comments.push(comment);
 				item.save();
 				console.log("new comment created");

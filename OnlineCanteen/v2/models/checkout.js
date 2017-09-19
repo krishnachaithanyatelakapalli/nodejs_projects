@@ -6,7 +6,7 @@ checkoutSchema = new mongoose.Schema({
 	list: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "Items"
+			ref: "Orders"
 		}
 	]
 });
