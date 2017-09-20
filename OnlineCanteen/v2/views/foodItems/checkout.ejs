@@ -1,13 +1,13 @@
 <% include ../partials/header %>
 	<div class="container">
-		<div class="page-header">
+		<div>
 			<h2>Checking out... <%= checkout.name %></h2>
 		</div>		
 		<ul class="list-group">
 			<% var total = 0 %>
 			<% checkout.list.forEach(function(item){ %>
 				<li class="list-group-item"><%= item.name %> x <span><%= item.quantity %></span> = <span class="pull-right">$ <%= item.price %></span></li>
-				<% total += (item.price * item.quantity ) %>
+				<% total += (item.price * item.quantity) %>
 			<% }) %>
 		</ul>
 		<hr>

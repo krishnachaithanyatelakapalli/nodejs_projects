@@ -151,15 +151,14 @@ app.post("/Order/:qnt", function(req, res){
 							} else {
 								checkout.list.push(order);
 								checkout.save();
+								res.render("foodItems/checkout", {checkout: checkout});
 							}			
 						});
 					}
-				});
-				
+				});				
 			});
-		}			
-	});	
-	res.redirect("/Checkout");
+		}					
+	});		
 	// res.end();
 });
 
@@ -169,6 +168,7 @@ app.get("/Checkout", function(req, res){
 			//Handle this error
 			console.log(err);
 		} else {			
+			// console.log(checkout);
 			res.render("foodItems/checkout", {checkout: checkout});
 		}
 	});	

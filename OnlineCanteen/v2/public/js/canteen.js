@@ -38,11 +38,11 @@ function disp_cart(){
 				"<li class='cart_li'>"	+
 				"<h5 class='inline-view'><strong>" + cart_item.item_name +  "</strong></h5>" +
 				"<p class='inline-view'> x " + cart_item.quantity + "</p>" +
-				"<button class='btn btn-default inline-view' id='remove_item'>X</button>" +
+				"<button class='btn btn-default inline-view' id='remove_item'><i class='fa fa-trash-o' aria-hidden='true'></i></button>" +
 				"</li>" +
 				"</div>" ;
 	});	
-	disp += "<hr><form id='checkout_form' action='/Order' method='POST'><button type='submit' class='btn btn-success' id='checkout_btn'>Checkout</button>" + "</form>";
+	disp += "<hr><form id='checkout_form' method='POST'><button type='submit' class='btn btn-success' id='checkout_btn'><i class='fa fa-shopping-cart' aria-hidden='true'></i> Checkout</button>" + "</form>";
 	cart_list.innerHTML = disp;
 	checkout();	
 }
@@ -59,7 +59,7 @@ function remove_btn_init(){
 			})
 			// list.pop(this.parentElement.querySelector("h5").textContent);
 			console.log(list);			
-			disp_cart();			
+			disp_cart();
 			remove_btn_init();
 		});
 	});	
@@ -68,8 +68,12 @@ function remove_btn_init(){
 function init(){
 	acquire();
 	data_init();
-	cart_display.style.display = "none";	
-	row.style.margin = "0 0";
+	if(cart_display !== null){
+		cart_display.style.display = "none";	
+	}
+	if(row !== null){
+		row.style.margin = "0 0";
+	}
 }
 
 var items,

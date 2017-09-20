@@ -14,12 +14,12 @@
 			<div class="form-group">
 				<textarea class="form-control" name="items[description]" rows="10" cols="40"><%= item.description %></textarea>
 			</div>
-			<input type="submit" class="btn btn-success">
+			<button type="submit" class="btn btn-success"><i class='fa fa-floppy-o' aria-hidden='true'></i> Save</button>
 		</form>
 		<a href="/Items/<%= item._id %>" class="btn btn-warning new-form">Cancel</a>
 		<form action="/Items/<%= item._id %>/delete?_method=DELETE" method="POST" class="new-form">
 			<div class="form-group">
-				<button class="btn btn-danger">Delete</button>
+				<button class="btn btn-danger"><i class='fa fa-trash' aria-hidden='true'></i> Delete</button>
 			</div>
 		</form>
 	</div>
