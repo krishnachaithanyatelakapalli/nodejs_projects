@@ -1,0 +1,12 @@
+.group{
+	display: inline-block;
+}
+.hide{
+	display: none;
+}
+.show{
+	display: block;
+}
+.form{
+	width: 200px;
+}

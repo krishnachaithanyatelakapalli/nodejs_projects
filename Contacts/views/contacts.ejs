@@ -1,0 +1,56 @@
+<% include ./partials/header %>
+	<div class='container'>
+		<div id='panel' class="panel panel-default">
+			<div class="panel-heading">
+				<h1 class="panel-title">Contacts Page</h1>
+			</div>
+			<div class="panel-body">	
+				<div class='input-group'>
+					<input id='search_bar' type='text' placeholder='Search' class='form-control' name='search' aria-describedby='search-addon'><span class='input-group-addon' id='search-addon'>Search</span>
+				</div>
+				<ul id='dropdown_menu' class='list-group'>
+				</ul>				
+				<ul class="list-group">
+					<% contact.forEach(function(cnt){ %>
+						<li class='list-group-item'>
+							<div class="row">
+								<div id='btn_div' class="col-md-2 pull-right group">
+									<button id='btn_edit' class='group btn btn-warning btn-sm'>Edit</button>
+									<button id='btn_delete' class='group btn btn-danger btn-sm'>Delete</button>
+								</div>
+								<div class='group col-md-2'>
+									<img class='thumbnail' src='<%= cnt.image %>'>
+								</div>								
+								<div id='contact_info' class='group contact col-md-8'>
+									<div id='info'>
+										<p id='name'><strong><%= cnt.name %></strong></p>
+										<p id='info'><span class='group'>Mobile: <span id='mobile'><%= cnt.contact.mobile %></span></span>, <span class='group'>Email: <span id='email'><%= cnt.contact.email %></span></span></p>
+										<p id='dob'>Date of Birth: <span id='dob'><%= cnt.dob %></span></p>
+									</div>
+									<div id='form' class='hide'>
+										<form action='/contacts/<%= cnt._id %>/edit?_method=PUT' method='POST'>
+											<div class='form-group'>
+												<div>
+													Name: <input id='ip_name' class='form-control' type='text' name='contact[name]' value='<%= cnt.name %>'>
+												</div>
+												<div>
+													Mobile: <input id='ip_mobile' class='form-control' type='text' name='contact[mobile]' value='<%= cnt.contact.mobile %>'>
+													Email: <input id='ip_email' class='form-control' type='text' name='contact[email]' value='<%= cnt.contact.email %>'>
+												</div>
+												<div>
+													Date of Birth: <input id='ip_dob' class='form-control' type='text' name='contact[dob]' value='<%= cnt.dob %>'>
+												</div>																				
+											</div>
+										</form>
+										<button class='group btn btn-success' id='btn_save'>Save</button>
+										<button class='btn btn-default group' id='btn_cancel'>Cancel</button>										
+									</div>
+								</div>								
+							</div>
+						</li>
+					<% }) %>
+				</ul>				
+			</div>
+		</div>
+	</div>
+<% include ./partials/footer %>
